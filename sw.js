@@ -53,3 +53,8 @@ self.addEventListener('install', e => {
     e.waitUntil( Promise.all([cacheProm, cacheInmutable]) );
 
 });
+
+self.addEventListener('fetch', e=>{
+
+    
+})
