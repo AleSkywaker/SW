@@ -57,33 +57,33 @@ self.addEventListener('install', e => {
 self.addEventListener('fetch', e=>{
 
      // 2- Cache with Network Fallback
-    // const respuesta = caches.match( e.request )
-    //     .then( res => {
+    const respuesta = caches.match( e.request )
+        .then( res => {
 
-    //         if ( res ) return res;
+            if ( res ) return res;
 
-    //         // No existe el archivo
-    //         // tengo que ir a la web
-    //         console.log('No existe', e.request.url );
-
-
-    //         return fetch( e.request ).then( newResp => {
-
-    //             caches.open( CACHE_DYNAMIC_NAME )
-    //                 .then( cache => {
-    //                     cache.put( e.request, newResp );
-    //                     limpiarCache( CACHE_DYNAMIC_NAME, 50 );
-    //                 });
-
-    //             return newResp.clone();
-    //         });
+            // No existe el archivo
+            // tengo que ir a la web
+            console.log('No existe', e.request.url );
 
 
-    //     });
+            return fetch( e.request ).then( newResp => {
+
+                caches.open( CACHE_DYNAMIC_NAME )
+                    .then( cache => {
+                        cache.put( e.request, newResp );
+                        limpiarCache( CACHE_DYNAMIC_NAME, 50 );
+                    });
+
+                return newResp.clone();
+            });
+
+
+        });
 
 
 
 
-    // e.respondWith( respuesta );
+    e.respondWith( respuesta );
 
 })
