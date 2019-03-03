@@ -51,7 +51,11 @@ self.addEventListener('fetch', (e) => {
 				});
 				return newResp.clone();
 			})
-			.catch((err) => caches.match('/pages/offline.html'));
+			.catch((err) => {
+				if (e.request.headers.get('accept').includes('text/html')) {
+					return caches.match('/pages/offline.html');
+				}
+			});
 	});
 
 	e.respondWith(respuesta);
