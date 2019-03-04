@@ -36,16 +36,16 @@ self.addEventListener('install', (e) => {
 
 self.addEventListener('activate', e => {
 
-	caches.keys().then(keys =>{
+	const respuesta = caches.keys().then(keys =>{
 
 		keys.forEach(key=>{
-			if(key !== CACHE_STATIC_NAME){
+			if(key !== CACHE_STATIC_NAME && key.includes('static')){
 				return caches.delete(key)
 			}
 		})
 	})
 
-	e.waitUntil();
+	e.waitUntil(respuesta);
 
 })
 
