@@ -34,6 +34,10 @@ self.addEventListener('install', (e) => {
 	e.waitUntil(Promise.all([ cacheProm, cacheInmutable ]));
 });
 
+self.addEventListener('activate', e=>{
+	
+})
+
 self.addEventListener('fetch', (e) => {
 	// 2- Cache with Network Fallback
 	const respuesta = caches.match(e.request).then((res) => {
