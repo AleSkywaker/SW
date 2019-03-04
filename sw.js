@@ -34,7 +34,16 @@ self.addEventListener('install', (e) => {
 	e.waitUntil(Promise.all([ cacheProm, cacheInmutable ]));
 });
 
-self.addEventListener('activate', e=>{
+self.addEventListener('activate', e => {
+
+	caches.keys().then(keys =>{
+
+		keys.forEach(key=>{
+			if(key !== CACHE_STATIC_NAME){
+				return caches.delete(key)
+			}
+		})
+	})
 
 	e.waitUntil();
 
